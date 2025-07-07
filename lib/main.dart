@@ -12,22 +12,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text('Welcome to flutter')),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(title: Text('List Widget')),
+        body: ListView(
           children: <Widget>[
-            Text('This'),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('This'),
-                Text('is'),
-                Text('a'),
-                Text('column'),
-              ],
+            ListTile(
+              title: Text('List 1'),
+              trailing: Icon(Icons.arrow_forward),
             ),
-            Text('a '),
-            Text('row'),
+            ListTile(
+              title: Text('List 2'),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text('List 3'),
+              trailing: Icon(Icons.arrow_forward),
+            ),
           ],
         ),
       ),
