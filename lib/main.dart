@@ -12,31 +12,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<int> items = [];
-
-  @override
-  void initState() {
-    for (int i = 0; i < 50; i++) {
-      items.add(i);
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Application',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text('List Widget - ArrayList')),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text('Item no $index'),
-              trailing: Icon(Icons.arrow_forward),
-            );
-          },
+        appBar: AppBar(title: Text('Stack Widget')),
+        body: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Card(
+              color: Colors.yellow,
+              child: Padding(padding: EdgeInsets.all(200.0)),
+            ),
+            Card(
+              color: Colors.green,
+              child: Padding(padding: EdgeInsets.all(100.0)),
+            ),
+            Card(
+              color: Colors.blue,
+              child: Padding(padding: EdgeInsets.all(50.0)),
+            ),
+            Card(
+              color: Colors.red,
+              child: Padding(padding: EdgeInsets.all(30.0)),
+            ),
+            Card(
+              color: Colors.grey,
+              child: Padding(padding: EdgeInsets.all(10.0)),
+            ),
+          ],
         ),
       ),
     );
