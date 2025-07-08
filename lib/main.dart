@@ -14,6 +14,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   String mtext = '';
 
+  void methodl(value) {
+    setState(() {
+      mtext = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,21 +29,17 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         appBar: AppBar(backgroundColor: Colors.grey, title: Text('Appbar')),
         body: Column(
           children: <Widget>[
-            TextField(
-              /*onChanged: (String txt) {
-                setState(() {
-                  mtext = txt;
-                });
-              },*/
-              onSubmitted: (String txt) {
-                setState(() {
-                  mtext = txt;
-                });
+            ElevatedButton(
+              onPressed: () {
+                methodl('You pressed elevated button');
               },
-              decoration: InputDecoration(
-                hintText: 'Type here...',
-                labelText: 'Fullname',
-              ),
+              child: Text('Elevated Button'),
+            ),
+            TextButton(
+              onPressed: () {
+                methodl('You pressed text button');
+              },
+              child: Text('Text Button'),
             ),
             Text(mtext),
           ],
