@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,13 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  String mtext = '';
-
-  void methodl(value) {
-    setState(() {
-      mtext = value;
-    });
-  }
+  bool cbool = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +22,18 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(backgroundColor: Colors.grey, title: Text('Appbar')),
-        body: Column(
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                methodl('You pressed elevated button');
-              },
-              child: Text('Elevated Button'),
-            ),
-            TextButton(
-              onPressed: () {
-                methodl('You pressed text button');
-              },
-              child: Text('Text Button'),
-            ),
-            Text(mtext),
-          ],
+        body: Center(
+          child: Checkbox(
+            value: cbool,
+            onChanged: (bool? cb) {
+              setState(() {
+                cbool = cb ?? false;
+                if (kDebugMode) {
+                  print(cbool);
+                }
+              });
+            },
+          ),
         ),
       ),
     );
