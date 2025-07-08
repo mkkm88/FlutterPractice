@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/customw.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey,
           title: Text('Appbar'),
           //centerTitle: true,
           titleSpacing: 80.0,
@@ -42,53 +43,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             },
             icon: Icon(Icons.menu),
           ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  mtext = 'This is arrow icon button';
-                });
-              },
-              icon: Icon(Icons.arrow_forward),
-            ),
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  mtext = 'This is close icon button';
-                });
-              },
-              icon: Icon(Icons.close),
-            ),
-          ],
-          bottom: TabBar(
-            controller: _tcontorl,
-            tabs: <Widget>[
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.supervisor_account)),
-              Tab(icon: Icon(Icons.close)),
-            ],
-          ),
         ),
-        body: //Center(child: Text(mtext)),
-        TabBarView(
-          controller: _tcontorl,
-          children: <Widget>[
-            Center(child: Text('Welcome to Home')),
-            Center(child: Text('Welcome to User account')),
-            Center(child: Text('Welcome to close page')),
-          ],
-        ),
-        bottomNavigationBar: Material(
-          color: Colors.blue,
-          child: TabBar(
-            controller: _tcontorl,
-            tabs: <Widget>[
-              Tab(icon: Icon(Icons.arrow_back)),
-              Tab(icon: Icon(Icons.circle_outlined)),
-              Tab(icon: Icon(Icons.square_outlined)),
-            ],
-          ),
-        ),
+        body: CustomWidgets(),
       ),
     );
   }
