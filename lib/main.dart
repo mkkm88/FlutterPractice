@@ -15,6 +15,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   bool cbool = false;
 
+  int rvalue = 0;
+
+  void method1(value) {
+    setState(() {
+      rvalue = value;
+      if (kDebugMode) {
+        print(rvalue);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,16 +34,38 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       home: Scaffold(
         appBar: AppBar(backgroundColor: Colors.grey, title: Text('Appbar')),
         body: Center(
-          child: Checkbox(
-            value: cbool,
-            onChanged: (bool? cb) {
-              setState(() {
-                cbool = cb ?? false;
-                if (kDebugMode) {
-                  print(cbool);
-                }
-              });
-            },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Radio(
+                value: 1,
+                groupValue: rvalue,
+                onChanged: (int? rval) {
+                  method1(rval);
+                },
+              ),
+              Radio(
+                value: 2,
+                groupValue: rvalue,
+                onChanged: (int? rval) {
+                  method1(rval);
+                },
+              ),
+              Radio(
+                value: 3,
+                groupValue: rvalue,
+                onChanged: (int? rval) {
+                  method1(rval);
+                },
+              ),
+              Radio(
+                value: 4,
+                groupValue: rvalue,
+                onChanged: (int? rval) {
+                  method1(rval);
+                },
+              ),
+            ],
           ),
         ),
       ),
