@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,37 +12,51 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  bool cbool = false;
-  int rvalue = 0;
-  double dtext = 2.0;
-
-  void method1(value) {
-    setState(() {
-      dtext = value;
-      if (kDebugMode) {
-        print(dtext);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Application',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.grey, title: Text('Appbar')),
-        body: Center(
-          child: Switch(
-            value: cbool,
-            onChanged: (bool sb) {
-              setState(() {
-                cbool = sb;
-                if (kDebugMode) {
-                  print(cbool);
-                }
-              });
-            },
+        appBar: AppBar(backgroundColor: Colors.grey, title: Text('Drawer')),
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text('Mohd Kasim'),
+                accountEmail: Text('dummy@kasim.com'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: Text('MK'),
+                ),
+                decoration: BoxDecoration(color: Colors.orange),
+                otherAccountsPictures: <Widget>[
+                  CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: Text('KK'),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: Text('SK'),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: Text('Page 1'),
+                trailing: Icon(Icons.arrow_forward),
+              ),
+              ListTile(
+                title: Text('Page 2'),
+                trailing: Icon(Icons.arrow_forward),
+              ),
+              ListTile(
+                title: Text('Close'),
+                trailing: Icon(Icons.close),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
         ),
       ),
