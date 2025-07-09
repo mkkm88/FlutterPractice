@@ -14,14 +14,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   bool cbool = false;
-
   int rvalue = 0;
+  double dtext = 2.0;
 
   void method1(value) {
     setState(() {
-      rvalue = value;
+      dtext = value;
       if (kDebugMode) {
-        print(rvalue);
+        print(dtext);
       }
     });
   }
@@ -37,34 +37,15 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Radio(
-                value: 1,
-                groupValue: rvalue,
-                onChanged: (int? rval) {
-                  method1(rval);
+              Slider(
+                value: dtext,
+                min: 1.0,
+                max: 10.0,
+                onChanged: (double dval) {
+                  method1(dval);
                 },
               ),
-              Radio(
-                value: 2,
-                groupValue: rvalue,
-                onChanged: (int? rval) {
-                  method1(rval);
-                },
-              ),
-              Radio(
-                value: 3,
-                groupValue: rvalue,
-                onChanged: (int? rval) {
-                  method1(rval);
-                },
-              ),
-              Radio(
-                value: 4,
-                groupValue: rvalue,
-                onChanged: (int? rval) {
-                  method1(rval);
-                },
-              ),
+              Text(' value : $dtext '),
             ],
           ),
         ),
