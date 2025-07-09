@@ -34,19 +34,16 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       home: Scaffold(
         appBar: AppBar(backgroundColor: Colors.grey, title: Text('Appbar')),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Slider(
-                value: dtext,
-                min: 1.0,
-                max: 10.0,
-                onChanged: (double dval) {
-                  method1(dval);
-                },
-              ),
-              Text(' value : $dtext '),
-            ],
+          child: Switch(
+            value: cbool,
+            onChanged: (bool sb) {
+              setState(() {
+                cbool = sb;
+                if (kDebugMode) {
+                  print(cbool);
+                }
+              });
+            },
           ),
         ),
       ),
