@@ -1,6 +1,5 @@
-// main.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/otherpages.dart'; // Ensure this file exists
+// import 'package:flutter_practice/otherpages.dart'; // Removed as it's not used in this version
 
 void main() {
   runApp(const MyApp());
@@ -13,91 +12,51 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+class _MyAppState extends State<MyApp> {
+  // Method to show a SnackBar.
+  // This method now takes a BuildContext which will be provided by a Builder widget.
+  void showMySnackBar(BuildContext context) {
+    // Ensure the context used here is a descendant of ScaffoldMessenger.
+    // The Builder widget below ensures this.
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Activated SnackBar')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Application',
       debugShowCheckedModeBanner: false,
-      // The Navigator is created by MaterialApp.
-      // We need a context that is a descendant of this Navigator.
-      // Wrapping the home Scaffold in a Builder provides such a context.
+      // The ScaffoldMessenger is provided by MaterialApp.
+      // To access it from within the Scaffold's children,
+      // we need a context that is below MaterialApp.
+      // A Builder widget provides such a context.
       home: Builder(
         builder: (BuildContext builderContext) {
-          // Use builderContext for Navigator operations
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.grey,
-              title: const Text('Drawer Example'), // Changed title for clarity
+              title: const Text(
+                'SnackBar Example',
+              ), // Updated title for clarity
             ),
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero, // Remove default ListView padding
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // UserAccountsDrawerHeader for the drawer header
-                  const UserAccountsDrawerHeader(
-                    accountName: Text('Mohd Kasim'),
-                    accountEmail: Text('dummy@kasim.com'),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.black26,
-                      child: Text('MK'),
-                    ),
-                    decoration: BoxDecoration(color: Colors.orange),
-                    otherAccountsPictures: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.black26,
-                        child: Text('KK'),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.black26,
-                        child: Text('SK'),
-                      ),
-                    ],
-                  ),
-                  // ListTile for navigating to Page 1
-                  ListTile(
-                    title: const Text('Page 1'),
-                    trailing: const Icon(Icons.arrow_forward),
-                    onTap: () {
-                      // Use builderContext for Navigator operations
-                      Navigator.of(builderContext).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const OtherPages('Page 1'),
-                        ),
-                      );
+                  const Text('Tap the button to activate the SnackBar!'),
+                  const SizedBox(height: 20), // Add some spacing
+                  ElevatedButton(
+                    onPressed: () {
+                      // Pass the builderContext to showMySnackBar.
+                      // This context is guaranteed to be a descendant of ScaffoldMessenger.
+                      showMySnackBar(builderContext);
                     },
-                  ),
-                  // ListTile for navigating to Page 2
-                  ListTile(
-                    title: const Text('Page 2'),
-                    trailing: const Icon(Icons.arrow_forward),
-                    onTap: () {
-                      // Use builderContext for Navigator operations
-                      Navigator.of(builderContext).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const OtherPages('Page 2'),
-                        ),
-                      );
-                    },
-                  ),
-                  // ListTile for closing the drawer
-                  ListTile(
-                    title: const Text(
-                      'Close Drawer',
-                    ), // Changed text for clarity
-                    trailing: const Icon(Icons.close),
-                    onTap: () {
-                      // Use builderContext for Navigator operations to pop the drawer
-                      Navigator.pop(builderContext);
-                    },
+                    child: const Text('Activate SnackBar'),
                   ),
                 ],
               ),
-            ),
-            body: const Center(
-              child: Text('Tap the drawer icon to open the navigation drawer!'),
             ),
           );
         },
