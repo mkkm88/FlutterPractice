@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
                   _dialogBuilder(builderContext);
                 },
                 child: const Text(
-                  'Activate AlertDialog',
+                  'Activate SimpleDialog',
                 ), // Added const for optimization
               ),
             ),
@@ -53,36 +54,30 @@ Future<void> _dialogBuilder(BuildContext context) {
     context: context, // Use the context passed from the Builder widget
     builder: (BuildContext dialogContext) {
       // Use a new context for the dialog's content
-      return AlertDialog(
+      return SimpleDialog(
         title: const Text('Basic dialog title'),
-        content: const Text(
-          'A dialog is a type of modal window that\n'
-          'appears in front of app content to\n'
-          'provide critical information, or prompt\n'
-          'for a decision to be made.',
-        ),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              // Accessing Theme.of(context) inside the dialog's builder
-              // is safe because dialogContext is a descendant of MaterialApp.
-              textStyle: Theme.of(dialogContext).textTheme.labelLarge,
-            ),
-            child: const Text('Disable'),
+        children: <Widget>[
+          SimpleDialogOption(
             onPressed: () {
-              // Navigator.of(dialogContext).pop() to dismiss the dialog
-              Navigator.of(dialogContext).pop();
+              if (kDebugMode) {
+                print('Yes');
+              }
             },
+            child: Text('Yes'),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(dialogContext).textTheme.labelLarge,
-            ),
-            child: const Text('Enable'),
+          SimpleDialogOption(
             onPressed: () {
-              // Navigator.of(dialogContext).pop() to dismiss the dialog
-              Navigator.of(dialogContext).pop();
+              if (kDebugMode) {
+                print('No');
+              }
             },
+            child: Text('No'),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Close'),
           ),
         ],
       );
